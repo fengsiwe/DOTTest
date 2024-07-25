@@ -1,6 +1,7 @@
 import sqlite3
 import csv
 import os
+from datetime import datetime
 
 def setup_database(db_name='outlets_transactions.db'):
     """Create the transactions table using SQLite database"""
@@ -25,6 +26,11 @@ def clean_data(row):
     try:
         row[0] = int(row[0])  # shop_id
         row[2] = int(row[2])  # n_trans
+
+        # Convert date from dd/mm/yy to yyyy-mm-dd
+        date_obj = datetime.strptime(row[1], "%d/%m/%y")
+        row[1] = date_obj.strftime("%Y-%m-%d")
+       
         return row
     except ValueError:
         return None    
@@ -51,11 +57,7 @@ def load_data(csv_file_name, db_name='outlets_transactions.db'):
     
     conn.commit()
     conn.close()
-
-
-def create_view(db_name='outlets_transactions.db'):
-    """Create a view which customer required"""
-
+    
 #Execute here
 setup_database()
 load_data('sample.csv')
