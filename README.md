@@ -19,7 +19,9 @@ This repository contains the solution for DOT Love data technical test. The solu
    - Created a SQL view `outlet_status` to determine the open/closed status of outlets over time.
    - Used window functions to compare dates and determine periods of inactivity (30+ days) to mark outlets as closed.
    - Defined status intervals and their corresponding start and end dates.
-   - 
+   - Applied the LEAD function to determine next status start dates and aggregated status changes.
+   - Computed start and end dates for each status period, adjusting for ongoing statuses and filtering out erroneous 'closed' records.
+   - Combined all steps into a single view to produce the final status periods for each shop.
 
 ## Files
 
